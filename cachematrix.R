@@ -1,5 +1,6 @@
 ## Second programming assignment of the R Programming course
-## invert a matrix and cache its value. Retrieve the inverted matrix from the cache if it exists.
+## Invert a matrix and cache its value. 
+## Retrieve the inverted matrix from the cache if it exists.
 
 
 ## makeCacheMatrix: This function wraps a "matrix" object that can cache  
@@ -21,9 +22,9 @@ makeCacheMatrix <- function(x = matrix()) {
     }
     ## returns the matrix
     get <- function() x
-    # stores the inverse
+    # stores the inverse. Will return an error if the matrix is singular
     setinv <- function(solve) i<<-solve
-    # returns the cached inverse
+    # returns the cached inverse. Will return NULL if cache empty
     getinv <- function() i
     list(set = set, get = get, setinv = setinv, getinv = getinv)
     
