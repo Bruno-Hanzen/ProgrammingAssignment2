@@ -30,7 +30,7 @@ makeCacheMatrix <- function(x = matrix()) {
     
 } 
 
-## cacheSolve: thus function returns the inverse of a matrix wrapped 
+## cacheSolve: this function returns the inverse of a matrix wrapped 
 ## by the makeCacheMatrix function,either by inverting it or by retrieving
 ## its value from the cache. 
 
