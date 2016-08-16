@@ -1,15 +1,49 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
-}
+## Second programming assignment of the R Programming course
+## invert a matrix and cache its value. Retrieve the inverted matrix from the cache if it exists.
 
 
-## Write a short comment describing this function
+## makeCacheMatrix: This function wraps a "matrix" object that can cache  
+## its inverse. The matrix is supposed to be invertible.
+## usage: set matrix: if m is a matrix, "a <- makeCacheMatrix(m)"
+##        get matrix: a$get()
+##        invert: cacheSolve(a)
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+
+
+makeCacheMatrix <- function(x = matrix()) { 
+    ## initiate the inverse to null
+    i <- NULL
+    ## loads matrix from the parent environment
+    set <- function(y){
+        x <<- y
+        ## initiate the inverse to null
+        i <- NULL
+    }
+    ## returns the matrix
+    get <- function() x
+    # stores the inverse
+    setinv <- function(solve) i<<-solve
+    # returns the cached inverse
+    getinv <- function() i
+    list(set = set, get = get, setinv = setinv, getinv = getinv)
+    
+} 
+
+## cacheSolve: thus function returns the inverse of a matrix wrapped 
+## by the makeCacheMatrix function,either by inverting it or by retrieving
+## its value from the cache. 
+
+
+cacheSolve <- function(x, ...) { 
+    ## Return a matrix that is the inverse of 'x' 
+    inv <- x$getinv()
+    if(!is.null(inv)){
+        message("getting cache inverse")
+        return(inv)
+    }
+    mat <- x$get()
+    ## matrix singularity not tested (supposed invertible)
+    inv <- solve(mat)
+    x$setinv(inv)
+    inv
 }
